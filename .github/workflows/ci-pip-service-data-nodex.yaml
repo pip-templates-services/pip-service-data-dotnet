@@ -25,7 +25,13 @@ jobs:
 
 
     # ############# Build and test #############
-
+    
+    - name: Set premissions
+      run: |
+        chmod u+x ./build.ps1
+        chmod u+x ./test.ps1
+        chmod u+x ./clear.ps1
+        
     - name: Build the component
       uses: pip-devops/actions/dotnet/build@v1
 

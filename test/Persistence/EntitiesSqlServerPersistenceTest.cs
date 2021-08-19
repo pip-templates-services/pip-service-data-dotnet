@@ -25,7 +25,7 @@ namespace PipTemplatesServiceData.Test.Persistence
 		public EntitiesSqlServerPersistenceTest()
         {
 			sqlserverUri = Environment.GetEnvironmentVariable("SQLSERVER_URI");
-			sqlserverHost = Environment.GetEnvironmentVariable("SQLSERVER_SERVICE_HOST") // ?? "localhost";
+			sqlserverHost = Environment.GetEnvironmentVariable("SQLSERVER_SERVICE_HOST"); // ?? "localhost";
 			sqlserverPort = Environment.GetEnvironmentVariable("SQLSERVER_SERVICE_PORT") ?? "1433";
 			sqlserverDatabase = Environment.GetEnvironmentVariable("SQLSERVER_DB") ?? "master";
 			sqlserverUsername = Environment.GetEnvironmentVariable("SQLSERVER_USER") ?? "sa";

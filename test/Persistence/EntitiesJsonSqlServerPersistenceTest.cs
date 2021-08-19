@@ -18,7 +18,7 @@ namespace PipTemplatesServiceData.Test.Persistence
 		public EntitiesJsonSqlServerPersistenceTest()
 		{
 			var sqlserverDb = Environment.GetEnvironmentVariable("SQLSERVER_DB") ?? "master";
-			var sqlserverHost = Environment.GetEnvironmentVariable("SQLSERVER_HOST") // ?? "localhost";
+			var sqlserverHost = Environment.GetEnvironmentVariable("SQLSERVER_HOST"); // ?? "localhost";
 			var sqlserverPort = Environment.GetEnvironmentVariable("SQLSERVER_PORT") ?? "1433";
 			var sqlserverUri = Environment.GetEnvironmentVariable("SQLSERVER_URI");
 			var sqlserverUser = Environment.GetEnvironmentVariable("SQLSERVER_USER") ?? "sa";

@@ -19,7 +19,7 @@ namespace PipTemplatesServiceData.Persistence
         {
             this.ClearSchema();
             this.EnsureSchema("CREATE TABLE entities (id VARCHAR(32), site_id VARCHAR(32), type VARCHAR(15), name VARCHAR(25), content VARCHAR(150))");
-            this.EnsureIndex("entities_site_id", new Dictionary<string, bool>{ { "site_id", true } }, new IndexOptions { Unique = true });
+            this.EnsureIndex("entities_site_id", new Dictionary<string, bool>{ { "site_id", true } }, new IndexOptions());
         }
 
         private string ComposeFilter(FilterParams filter)

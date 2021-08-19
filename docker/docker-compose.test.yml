@@ -13,7 +13,7 @@ services:
       - elasticsearch
       - prometheus
       - pushgateway
-      - sqlserver
+      # - sqlserver
       # - couchbase
     
     environment:
@@ -49,11 +49,11 @@ services:
       # - COUCHBASE_USER=Administrator
       # - COUCHBASE_PASS=password
 
-      - SQLSERVER_HOST=sqlserver
-      - SQLSERVER_PORT=1433
-      - SQLSERVER_USER=sa
-      - SQLSERVER_PASSWORD=sqlserver_123
-      - SQLSERVER_DB=master
+      # - SQLSERVER_HOST=sqlserver
+      # - SQLSERVER_PORT=1433
+      # - SQLSERVER_USER=sa
+      # - SQLSERVER_PASSWORD=sqlserver_123
+      # - SQLSERVER_DB=master
 
   mongo:
     image: mongo:latest
@@ -96,12 +96,12 @@ services:
     image: prom/pushgateway:latest
     container_name: pushgateway
 
-  sqlserver:
-    image: mcr.microsoft.com/mssql/server:2019-latest
-    container_name: sqlserver
-    environment:
-      ACCEPT_EULA: Y
-      SA_PASSWORD: sqlserver_123
+  # sqlserver:
+  #   image: mcr.microsoft.com/mssql/server:2019-latest
+  #   container_name: sqlserver
+  #   environment:
+  #     ACCEPT_EULA: Y
+  #     SA_PASSWORD: sqlserver_123
 
   # couchbase:
   #   image: couchbase/server-sandbox:6.0.1

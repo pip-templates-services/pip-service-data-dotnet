@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/core/runtime:3.1
+FROM mcr.microsoft.com/dotnet/sdk:3.1
 
 # Set working directory
 WORKDIR /app
@@ -17,4 +17,4 @@ ENV MONGO_SERVICE_PORT=27017
 # Expose the HTTP port
 EXPOSE "8080:8080"
 
-CMD sh -c sleep 50 && dotnet ./bin/main.dll -c ./config/config.yml
+CMD dotnet ./bin/main.dll -c ./config/config.yml

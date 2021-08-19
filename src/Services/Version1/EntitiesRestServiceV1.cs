@@ -1,16 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
-using PipServices3.Commons.Data;
 using PipServices3.Commons.Refer;
 using PipServices3.Rpc.Services;
 using PipTemplatesServiceData.Data.Version1;
 using PipTemplatesServiceData.Logic;
-using Microsoft.Extensions.Primitives;
 using PipServices3.Commons.Convert;
 using System.IO;
 

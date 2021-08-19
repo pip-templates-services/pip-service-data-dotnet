@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using PipServices3.Commons.Data;
 using PipTemplatesServiceData.Data.Version1;
 using PipTemplatesServiceData.Persistence;

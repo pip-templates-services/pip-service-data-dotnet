@@ -31,6 +31,8 @@ jobs:
         chmod u+x ./build.ps1
         chmod u+x ./test.ps1
         chmod u+x ./clean.ps1
+        chmod u+x ./package.ps1
+        chmod u+x ./publish.ps1
         
     - name: Build the component
       uses: pip-devops/actions/dotnet/build@v1
@@ -50,17 +52,17 @@ jobs:
     #     sudo apt-get update
     #     sudo apt-get install -y powershell
 
-    # - name: Package container
-    #   run: ./package.ps1
+    - name: Package container
+      run: ./package.ps1
 
     # - name: Package lambda
     #   run: ./pack_lambda.ps1
 
-    # - name: Release to Docker Hub
-    #   run: ./publish.ps1
-    #   env: 
-    #     DOCKER_USER: ${{ secrets.DOCKER_USER }}
-    #     DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
+    - name: Release to Docker Hub
+      run: ./publish.ps1
+      env: 
+        DOCKER_USER: ${{ secrets.DOCKER_USER }}
+        DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
 
 
     ############# Clear #############

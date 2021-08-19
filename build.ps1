@@ -25,6 +25,7 @@ docker build -f docker/Dockerfile.build -t $buildImage .
 # Create and copy compiled files, then destroy
 docker create --name $container $buildImage
 docker cp "$($container):/obj" ./obj
+docker cp "$($container):/dist" ./dist
 docker rm $container
 
 if (!(Test-Path ./obj)) {

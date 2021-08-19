@@ -1,0 +1,184 @@
+﻿openapi: '3.0.2'
+info:
+  title: 'Entities Service V1'
+  description: 'Sample data microservice'
+  version: '1'
+paths:
+  /v1/entities:
+    get:
+      tags:
+        - v1/entities
+      operationId: 'get_entities'
+      description: "Returns the page of Entities"
+      parameters:
+      - name: "skip"
+        in: "query"
+        description: "amount of records to skip (start of page)"
+        required: false
+        schema:
+          type: 'integer'
+          format: 'int64'
+        
+      - name: "take"
+        in: "query"
+        description: "amount of records to take after skipping (page length)"
+        required: false
+        schema:
+          type: 'integer'
+          format: 'int32'
+          maximum: 100
+        
+      - name: "total"
+        in: "query"
+        description: " whether or not to return the total amount of records present"
+        required: false
+        schema:
+          type: "boolean"
+        
+      responses:
+        200:
+          description: 'Successful response'
+          content:
+            application/json:
+              schema:
+                type: 'array'
+                items:
+                  $ref: "#/definitions/entity"
+                
+    post:
+      tags:
+        - v1/entities
+      operationId: 'create_entity'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                entity:
+                  $ref: "#/definitions/entity"
+              required:
+                - entity
+      responses:
+        200:
+          description: 'Successful response'
+          content:
+            application/json:
+              schema:
+                $ref: "#/definitions/entity"
+                
+    put:
+      tags:
+        - v1/entities
+      operationId: 'update_entity'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                entity:
+                  $ref: "#/definitions/entity"
+              required:
+                - entity
+      responses:
+        200:
+          description: 'Successful response'
+          content:
+            application/json:
+              schema:
+                $ref: "#/definitions/entity"
+      
+      
+  /v1/entities/{id}:
+    get:
+      tags:
+        - v1/entities
+      operationId: 'get_entity_by_id'
+      description: "Returns the Entity by id"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "id of the Entity"
+        required: true
+        schema:
+          type: 'string'
+      
+      responses:
+        200:
+          description: 'Successful response'
+          content:
+            application/json:
+              schema:
+                $ref: "#/definitions/entity"
+                
+  /v1/entities/name/{entity_name}:
+    get:
+      tags:
+        - v1/entities
+      operationId: 'get_entity_by_name'
+      description: "Returns the Entity by name"
+      parameters:
+      - name: "entity_name"
+        in: "path"
+        description: "name of the Entity"
+        required: true
+        schema:
+          type: 'string'
+      
+      responses:
+        200:
+          description: 'Successful response'
+          content:
+            application/json:
+              schema:
+                $ref: "#/definitions/entity"
+                            
+  /v1/entities/{entity_id}:
+    delete:
+      tags:
+        - v1/entities
+      operationId: 'delete_entity'
+      parameters:
+      - name: "entity_id"
+        in: "path"
+        description: "id of the Entity"
+        required: true
+        schema:
+          type: 'string'
+          
+      responses:
+        200:
+          description: 'Successful delete'
+          content:
+            application/json:
+              schema:
+               $ref: "#/definitions/entity"
+                
+definitions:
+  entity:
+    description: 'json instance of entity'
+    type: 'object'
+    properties:
+      id:
+        type: 'string'
+        required: false
+      site_id:
+        type: 'string'
+        required: true
+      type:
+        type: 'string'
+        required: false
+      name:
+        type: 'string'
+        required: true
+      name:
+        type: 'string'
+        required: false
+      content:
+        type: 'array'
+        items:
+          type: 'integer'
+        required: false
+      radius:
+        type: 'number'
+        required: false
+    

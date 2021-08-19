@@ -1,0 +1,122 @@
+﻿// Copyright 2015 gRPC authors.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+
+// !!!Important note!!!
+//    When regenerating the files in the "protos" folder using "npm run protogen", 
+//    you will need to manually change the following lines in entities_v1_pb.js 
+//    for PagingParams to work correctly:
+//
+//        proto.entities_v1.PagingParams.prototype.getSkip = function() {
+//          return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0)); // Change this default value of 0 to null
+//        };
+//
+//        proto.entities_v1.PagingParams.prototype.getTake = function() {
+//          return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0)); // Change this default value of 0 to null
+//        };
+//
+//        proto.entities_v1.PagingParams.toObject = function(includeInstance, msg) {
+//          var f, obj = {
+//            skip: jspb.Message.getFieldWithDefault(msg, 1, 0), // Change this default value of 0 to null
+//            take: jspb.Message.getFieldWithDefault(msg, 2, 0), // Change this default value of 0 to null
+//            total: jspb.Message.getBooleanFieldWithDefault(msg, 3, false)
+//        };
+
+
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "entities.version1";
+option java_outer_classname = "EntitiesProtoV1";
+option objc_class_prefix = "ENTITIES_CMD_V1";
+
+package entities_v1;
+
+message ErrorDescription {
+  string type = 1;
+  string category = 2;
+  string code = 3;
+  string correlation_id = 4;
+  string status = 5;
+  string message = 6;
+  string cause = 7;
+  string stack_trace = 8;
+  map<string, string> details = 9;
+}
+
+message PagingParams {
+    int64 skip = 1;
+    int32 take = 2;
+    bool total = 3;
+}
+
+message Entity {
+    string id = 1;
+    string site_id = 2;
+    string type = 3;
+    string name = 4;
+    string content = 5;
+}
+
+message EntitiesPage {
+    int64 total = 1;
+    repeated Entity data = 2;
+}
+
+// The Entities service definition.
+service Entities {
+  rpc get_entities (EntitiesPageRequest) returns (EntitiesPageReply) {}
+  rpc get_entity_by_id (EntityIdRequest) returns (EntityReply) {}
+  rpc get_entity_by_name (EntityNameRequest) returns (EntityReply) {}
+  rpc create_entity (EntityRequest) returns (EntityReply) {}
+  rpc update_entity (EntityRequest) returns (EntityReply) {}
+  rpc delete_entity_by_id (EntityIdRequest) returns (EntityReply) {}
+}
+
+// The request message containing the Entities page request.
+message EntitiesPageRequest {
+  string correlation_id = 1;
+  map<string, string> filter = 2;
+  PagingParams paging = 3;
+}
+
+// The response message containing the Entities page response.
+message EntitiesPageReply {
+  ErrorDescription error = 1;
+  EntitiesPage page = 2;
+}
+
+// The request message containing the Entity id request.
+message EntityIdRequest {
+  string correlation_id = 1;
+  string entity_id = 2;
+}
+
+// The response message containing the Entity response.
+message EntityReply {
+  ErrorDescription error = 1;
+  Entity entity = 2;
+}
+
+// The request message containing the Entity name request.
+message EntityNameRequest {
+  string correlation_id = 1;
+  string name = 2;
+}
+
+// The request message containing the Entity request
+message EntityRequest {
+  string correlation_id = 1;
+  Entity entity = 2;
+}

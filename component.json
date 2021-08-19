@@ -1,0 +1,6 @@
+{
+    "name": "pip-service-data-dotnet",
+    "registry": "pipdevs",
+    "version": "1.0.0",
+    "build": 99
+}

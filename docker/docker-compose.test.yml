@@ -1,0 +1,109 @@
+version: '3.3'
+
+services:
+  test:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.test
+    image: ${IMAGE:-test}
+    links:
+      - mongo
+      - postgres
+      - mysql
+      - elasticsearch
+      - prometheus
+      - pushgateway
+      - sqlserver
+      # - couchbase
+    
+    environment:
+      - MONGO_SERVICE_HOST=mongo
+      - MONGO_SERVICE_PORT=27017
+      - MONGO_DB=test
+
+      - POSTGRES_SERVICE_HOST=postgres
+      - POSTGRES_SERVICE_PORT=5432
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASS=postgres
+      - POSTGRES_DB=test
+
+      - MYSQL_HOST=mysql
+      - MYSQL_PORT=3306
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+      - MYSQL_DB=test
+
+      - PROMETHEUS_SERVICE_HOST=prometheus
+      - PROMETHEUS_SERVICE_PORT=9090
+
+      - PUSHGATEWAY_METRICS_SERVICE_HOST=pushgateway
+      - PUSHGATEWAY_METRICS_SERVICE_PORT=9091
+      - PUSHGATEWAY_METRICS_ENABLED=true
+
+      - ELASTICSEARCH_LOGGING_ENABLED=true
+      - ELASTICSEARCH_SERVICE_HOST=elasticsearch
+      - ELASTICSEARCH_SERVICE_PORT=9200
+
+      # - COUCHBASE_SERVICE_HOST=couchbase
+      # - COUCHBASE_SERVICE_PORT=8091
+      # - COUCHBASE_USER=Administrator
+      # - COUCHBASE_PASS=password
+
+      - SQLSERVER_HOST=sqlserver
+      - SQLSERVER_PORT=1433
+      - SQLSERVER_USER=sa
+      - SQLSERVER_PASSWORD=sqlserver_123
+      - SQLSERVER_DB=master
+
+  mongo:
+    image: mongo:latest
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: test
+
+  mysql:
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    container_name: mysql
+    environment:
+      MYSQL_DATABASE: 'test'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
+  
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.2.3
+    container_name: elasticsearch
+    environment:
+      # - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms128m -Xmx128m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+
+  pushgateway:
+    image: prom/pushgateway:latest
+    container_name: pushgateway
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: sqlserver
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: sqlserver_123
+
+  # couchbase:
+  #   image: couchbase/server-sandbox:6.0.1
+
+  

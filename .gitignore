@@ -245,3 +245,10 @@ ModelManifest.xml
 
 # prevent accidential upload file with credentials
 nuget.config
+/.idea/.idea.pip-service-data-dotnet/.idea/contentModel.xml
+/.idea/.idea.pip-service-data-dotnet/.idea/encodings.xml
+/.idea/.idea.pip-service-data-dotnet/.idea/indexLayout.xml
+/.idea/.idea.pip-service-data-dotnet/.idea/modules.xml
+/.idea/.idea.pip-service-data-dotnet/.idea/projectSettingsUpdater.xml
+/.idea/.idea.pip-service-data-dotnet/riderModule.iml
+/.idea/.idea.pip-service-data-dotnet/.idea/vcs.xml

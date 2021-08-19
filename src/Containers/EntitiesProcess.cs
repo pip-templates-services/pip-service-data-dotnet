@@ -13,8 +13,6 @@ namespace PipTemplatesServiceData.Containers
     {
         public EntitiesProcess() : base("pip-service-data", "Entities data microservice")
         {
-            _configPath = "../../../../config/config.yml";
-
             this._factories.Add(new EntitiesServiceFactory());
             this._factories.Add(new DefaultElasticSearchFactory());
             this._factories.Add(new DefaultPrometheusFactory());

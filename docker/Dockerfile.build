@@ -6,11 +6,20 @@ WORKDIR /app
 # Restore
 COPY src/src.csproj ./src/
 RUN dotnet restore src/src.csproj
-COPY test/test.csproj ./test/
-RUN dotnet restore test/test.csproj
+COPY process/process.csproj ./process/
+RUN dotnet restore process/process.csproj
+
 
 # Copy src
 COPY . .
 
+
 # Publish
-RUN dotnet publish process/process.csproj -o /obj -f netcoreapp3.1
+RUN dotnet build src/src.csproj
+RUN dotnet publish src/src.csproj --force -o /obj
+RUN dotnet build process/process.csproj
+RUN dotnet publish process/process.csproj --force -o /obj
+
+# Pack Nuget
+RUN dotnet build src/src.csproj -c Release
+RUN dotnet pack src/src.csproj -c Release -o ../../../dist

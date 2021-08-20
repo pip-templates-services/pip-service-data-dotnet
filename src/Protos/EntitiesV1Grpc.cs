@@ -48,7 +48,7 @@ namespace EntitiesV1 {
   /// </summary>
   public static partial class Entities
   {
-    static readonly string __ServiceName = "entities_v1.Entities";
+    static readonly string __ServiceName = "entities_v1.EntitiesV1";
 
     static readonly grpc::Marshaller<global::EntitiesV1.EntitiesPageRequest> __Marshaller_entities_v1_EntitiesPageRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::EntitiesV1.EntitiesPageRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::EntitiesV1.EntitiesPageReply> __Marshaller_entities_v1_EntitiesPageReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::EntitiesV1.EntitiesPageReply.Parser.ParseFrom);

@@ -83,7 +83,7 @@ namespace PipTemplatesServiceData.Test.Services.Version1
             persistence.CloseAsync(null).Wait();
         }
 
-        //[Fact]
+        [Fact]
         public async Task TestCrudOperationsAsync()
         {
             var callOptions = new CallOptions();
@@ -94,7 +94,7 @@ namespace PipTemplatesServiceData.Test.Services.Version1
                 Entity= EntitiesGrpcConverterV1.FromEntity(ENTITY1)
             };
 
-            var response = await client.create_entityAsync(request, callOptions); // TODO: it returns status code 12 (Unimplemented grpc method)
+            var response = await client.create_entityAsync(request, callOptions);
 
             var entity = EntitiesGrpcConverterV1.ToEntity(response.Entity);
 
@@ -106,19 +106,19 @@ namespace PipTemplatesServiceData.Test.Services.Version1
             Assert.NotNull(entity.Content);
 
             // Create the second entity
-            //request = new EntitiesV1.EntityRequest()
-            //{
-            //    CorrelationId = correlationId,
-            //    Entity = EntitiesGrpcConverterV1.FromEntity(ENTITY2)
-            //};
-            //entity = client.create_entity(request).Entity;
+            request = new EntitiesV1.EntityRequest()
+            {
+                CorrelationId = correlationId,
+                Entity = EntitiesGrpcConverterV1.FromEntity(ENTITY2)
+            };
+            entity = EntitiesGrpcConverterV1.ToEntity(client.create_entity(request).Entity);
 
-            //Assert.NotNull(entity);
-            //Assert.Equal(ENTITY2.Name, entity.Name);
-            //Assert.Equal(ENTITY2.SiteId, entity.SiteId);
-            //Assert.Equal(ENTITY2.Type, entity.Type);
-            //Assert.Equal(ENTITY2.Name, entity.Name);
-            //Assert.NotNull(entity.Content);
+            Assert.NotNull(entity);
+            Assert.Equal(ENTITY2.Name, entity.Name);
+            Assert.Equal(ENTITY2.SiteId, entity.SiteId);
+            Assert.Equal(ENTITY2.Type, entity.Type);
+            Assert.Equal(ENTITY2.Name, entity.Name);
+            Assert.NotNull(entity.Content);
 
         }
     }

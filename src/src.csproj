@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="PipServices3.Commons" Version="3.2.0" />
     <PackageReference Include="PipServices3.Container" Version="3.1.2" />
     <PackageReference Include="PipServices3.Data" Version="3.3.1" />

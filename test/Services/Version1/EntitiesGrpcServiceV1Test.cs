@@ -111,7 +111,9 @@ namespace PipTemplatesServiceData.Test.Services.Version1
                 CorrelationId = correlationId,
                 Entity = EntitiesGrpcConverterV1.FromEntity(ENTITY2)
             };
-            entity = EntitiesGrpcConverterV1.ToEntity(client.create_entity(request).Entity);
+            response = await client.create_entityAsync(request, callOptions);
+
+            entity = EntitiesGrpcConverterV1.ToEntity(response.Entity);
 
             Assert.NotNull(entity);
             Assert.Equal(ENTITY2.Name, entity.Name);
@@ -119,6 +121,64 @@ namespace PipTemplatesServiceData.Test.Services.Version1
             Assert.Equal(ENTITY2.Type, entity.Type);
             Assert.Equal(ENTITY2.Name, entity.Name);
             Assert.NotNull(entity.Content);
+
+            // Get all entities
+            var pageRequest = new EntitiesV1.EntitiesPageRequest() { 
+                Paging= new EntitiesV1.PagingParams()
+             };
+
+            var responsePage = await client.get_entitiesAsync(pageRequest);
+
+            var page = responsePage != null ? responsePage.Page : null;
+
+            Assert.NotNull(page);
+            Assert.Equal(2, page.Data.Count);
+
+            var entity1 = page.Data[0];
+
+            // Update the entity
+            entity1.Name = "ABC";
+
+            request = new EntitiesV1.EntityRequest();
+            request.Entity = entity1;
+
+            response = await client.update_entityAsync(request);
+
+            entity = response!=null ? EntitiesGrpcConverterV1.ToEntity(response.Entity) : null;
+
+            Assert.NotNull(entity);
+            Assert.Equal(entity1.Id, entity.Id);
+            Assert.Equal("ABC", entity.Name);
+
+            // Get entity by name
+            var requestName = new EntitiesV1.EntityNameRequest() { Name=entity1.Name };
+
+            response = await client.get_entity_by_nameAsync(requestName);
+
+            entity = response != null ? EntitiesGrpcConverterV1.ToEntity(response.Entity) : null;
+
+            Assert.NotNull(entity);
+            Assert.Equal(entity1.Id, entity.Id);
+
+            // Delete the entity
+            var requestId = new EntitiesV1.EntityIdRequest() { EntityId=entity1.Id };
+
+            response = await client.delete_entity_by_idAsync(requestId);
+
+            entity = response != null ? EntitiesGrpcConverterV1.ToEntity(response.Entity) : null;
+
+            Assert.NotNull(entity);
+            Assert.Equal(entity1.Id, entity.Id);
+
+            // Try to get deleted entity
+
+            requestId = new EntitiesV1.EntityIdRequest() { EntityId = entity1.Id };
+
+            response = await client.delete_entity_by_idAsync(requestId);
+
+            entity = response != null ? EntitiesGrpcConverterV1.ToEntity(response.Entity) : null;
+
+            Assert.Null(entity);
 
         }
     }

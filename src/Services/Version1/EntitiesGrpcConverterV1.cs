@@ -14,22 +14,21 @@ namespace PipTemplatesServiceData.Services.Version1
     public class EntitiesGrpcConverterV1
     {
 
-        public static object FromError(object err)
+        public static EntitiesV1.ErrorDescription FromError(Exception err)
         {
             if (err == null) return null;
 
-            var description = ErrorDescriptionFactory.Create((Exception)(err != null ? err : null));
-            var obj = new EntitiesV1.ErrorDescription()
-            {
-                Type = description.Type,
-                Category = description.Category,
-                Code = description.Code,
-                CorrelationId = description.CorrelationId,
-                Status = description.Status.ToString(),
-                Message = description.Message,
-                Cause = description.Cause,
-                StackTrace = description.StackTrace
-            };
+            var description = ErrorDescriptionFactory.Create(err);
+            var obj = new EntitiesV1.ErrorDescription();
+
+            obj.Type = description.Type != null ? description.Type : "default";
+            obj.Category = description.Category != null ? description.Category : "default";
+            obj.Code = description.Code != null ? description.Code : "default";
+            obj.CorrelationId = description.CorrelationId != null ? description.CorrelationId : "default";
+            obj.Status = description.Status.ToString() != null ? description.Status.ToString() : "default";
+            obj.Message = description.Message != null ? description.Message : "default";
+            obj.Cause = description.Cause != null ? description.Cause : "default";
+            obj.StackTrace = description.StackTrace != null ? description.StackTrace : "default";
 
             EntitiesGrpcConverterV1.SetMap(obj.Details, description.Details);
 

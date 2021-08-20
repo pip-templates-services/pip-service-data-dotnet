@@ -47,7 +47,7 @@ namespace PipTemplatesServiceData.Services.Version1
             catch (Exception ex)
             {
                 var err = EntitiesGrpcConverterV1.FromError(ex);
-                response.Error = (EntitiesV1.ErrorDescription)err; // todo check
+                response.Error = err;
             }
             finally
             {
@@ -77,7 +77,7 @@ namespace PipTemplatesServiceData.Services.Version1
             catch (Exception err)
             {
                 var error = EntitiesGrpcConverterV1.FromError(err);
-                response.Error = (EntitiesV1.ErrorDescription)error;//todo
+                response.Error = error;
             }
             finally
             {
@@ -108,7 +108,7 @@ namespace PipTemplatesServiceData.Services.Version1
             catch (Exception err)
             {
                 var error = EntitiesGrpcConverterV1.FromError(err);
-                response.Error = (EntitiesV1.ErrorDescription)error;//todo
+                response.Error = error;
             }
             finally
             {
@@ -126,7 +126,7 @@ namespace PipTemplatesServiceData.Services.Version1
 
             var response = new EntitiesV1.EntityReply();
             var timing = this.Instrument(correlationId, "create_entity");
-
+            
             try
             {
                 var result = await this._controller.CreateEntityAsync(
@@ -139,7 +139,7 @@ namespace PipTemplatesServiceData.Services.Version1
             catch (Exception err)
             {
                 var error = EntitiesGrpcConverterV1.FromError(err);
-                response.Error = (EntitiesV1.ErrorDescription)error;//todo
+                response.Error = error;
             }
             finally
             {
@@ -170,7 +170,7 @@ namespace PipTemplatesServiceData.Services.Version1
             catch (Exception err)
             {
                 var error = EntitiesGrpcConverterV1.FromError(err);
-                response.Error = (EntitiesV1.ErrorDescription)error;//todo
+                response.Error = error;
             }
             finally
             {
@@ -200,7 +200,7 @@ namespace PipTemplatesServiceData.Services.Version1
             catch (Exception err)
             {
                 var error = EntitiesGrpcConverterV1.FromError(err);
-                response.Error = (EntitiesV1.ErrorDescription)error;//todo
+                response.Error = error;
             }
             finally
             {

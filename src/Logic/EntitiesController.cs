@@ -12,6 +12,10 @@ namespace PipTemplatesServiceData.Logic
 {
     public class EntitiesController : IEntitiesController, IConfigurable, IReferenceable, ICommandable
     {
+
+        public EntitiesController() 
+        { }
+
         private IEntitiesPersistence _persistence;
         private EntitiesCommandSet _commandSet;
 

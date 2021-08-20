@@ -9,8 +9,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Swagger\entities_v1.yaml" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <EmbeddedResource Include="Swagger\entities_v1.yaml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="PipServices3.Commons" Version="3.2.0" />
     <PackageReference Include="PipServices3.Container" Version="3.1.2" />
+    <PackageReference Include="PipServices3.Data" Version="3.3.1" />
     <PackageReference Include="PipServices3.DataDog" Version="3.1.0" />
     <PackageReference Include="PipServices3.ElasticSearch" Version="3.2.0" />
     <PackageReference Include="PipServices3.Grpc" Version="3.0.2" />
@@ -25,6 +36,10 @@
 
   <ItemGroup>
     <Protobuf Include="Protos\entities_v1.proto" Link="entities_v1.proto" OutputDir="%(RelativeDir)\.." />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
 
 </Project>

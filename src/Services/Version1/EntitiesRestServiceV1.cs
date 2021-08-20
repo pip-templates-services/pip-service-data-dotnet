@@ -180,7 +180,7 @@ namespace PipTemplatesServiceData.Services.Version1
             this.RegisterRoute("put", "/entities", this.UpdateEntityAsync);
             this.RegisterRoute("delete", "/entities/{id}", this.DeleteEntityByIdAsync);
 
-            this.RegisterOpenApiSpecFromFile(Directory.GetCurrentDirectory() + "/../../../../src/swagger/entities_v1.yaml");
+            RegisterOpenApiSpecFromResource("entities_v1.yaml");
         }
 
     }

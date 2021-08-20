@@ -119,9 +119,9 @@ namespace PipTemplatesServiceData.Services.Version1
 
             var obj = new EntitiesV1.PagingParams
             {
-                Skip = (long)paging.Skip,
-                Take = (int)paging.Take,
-                Total = paging.Total
+                Skip = paging.Skip != null ? (long)paging.Skip : default,
+                Take = paging.Take != null ? (int)paging.Take : default,
+                Total = paging.Total ? paging.Total : default
             };
 
             return obj;
@@ -132,11 +132,14 @@ namespace PipTemplatesServiceData.Services.Version1
             if (obj == null)
                 return null;
 
-            var paging = new PagingParams(
-                obj.Skip,
-                obj.Take,
-                obj.Total
-            );
+            var paging = new PagingParams();
+
+            paging.Total = obj.Total;
+
+            if (obj.Skip != 0)
+                paging.Skip = obj.Skip;
+            if (obj.Take != 0)
+                paging.Take = obj.Skip;
 
             return paging;
         }
@@ -179,7 +182,7 @@ namespace PipTemplatesServiceData.Services.Version1
 
             var obj = new EntitiesV1.EntitiesPage
             {
-                Total = (long)page.Total,
+                Total = page.Total != null ? (long)page.Total : default,
             };
 
             page.Data.ForEach((item) =>
@@ -197,7 +200,7 @@ namespace PipTemplatesServiceData.Services.Version1
             var data = new List<EntityV1>();
 
             foreach (var item in obj.Data)
-                data.Add(EntitiesGrpcConverterV1.ToEntity(item));
+                data.Add(ToEntity(item));
 
             var page = new DataPage<EntityV1>
             {

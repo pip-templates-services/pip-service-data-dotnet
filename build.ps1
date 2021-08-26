@@ -18,6 +18,9 @@ $container = $component.name
 if (Test-Path "obj") {
     Remove-Item -Recurse -Force -Path "obj"
 }
+if (Test-Path "dist") {
+    Remove-Item -Recurse -Force -Path "dist"
+}
 
 # Build docker image
 docker build -f docker/Dockerfile.build -t $buildImage .
@@ -25,7 +28,7 @@ docker build -f docker/Dockerfile.build -t $buildImage .
 # Create and copy compiled files, then destroy
 docker create --name $container $buildImage
 docker cp "$($container):/obj" ./obj
-docker cp "$($container):/dist" ./dist
+docker cp "$($container):/dist" .
 docker rm $container
 
 if (!(Test-Path ./obj)) {

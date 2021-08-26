@@ -10,7 +10,7 @@ $container=$component.name
 
 # Remove build files
 if (Test-Path "./src/Protos") {
-    Remove-Item -Recurse -Force -Path "./src/Protos/*V1.cs"
+    Remove-Item -Recurse -Force -Path "./src/Protos/*.cs"
 } else {
     New-Item -ItemType Directory -Force -Path "./src/Protos"
 }

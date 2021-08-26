@@ -8,7 +8,7 @@ using Xunit;
 namespace PipTemplatesServiceData.Test.Persistence
 {
     [Collection("Sequential")]
-    public class EntitiesPostgresPersistenceTest
+    public class EntitiesPostgresPersistenceTest: IDisposable
     {
         private EntitiesPostgresPersistence persistence;
         private EntitiesPersistenceFixture fixture;

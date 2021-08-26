@@ -1,15 +1,10 @@
 # Build stage
-FROM alpine
+FROM mcr.microsoft.com/dotnet/sdk:3.1
 
 # set working directory
 WORKDIR /app
 
 COPY . .
 
-# Add protoc
-RUN apk update && \
-    apk upgrade && \
-    apk add protoc
-
 # Generate
-RUN protoc --proto_path=src/Protos --csharp_out=src/Protos --csharp_opt=file_extension=.cs,base_namespace=EntitiesV1 src/Protos/entities_v1.proto
+RUN dotnet build

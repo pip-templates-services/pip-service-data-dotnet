@@ -58,7 +58,7 @@ namespace PipTemplatesServiceData.Test.Services.Version1
             controller = new EntitiesController();
             controller.Configure(new ConfigParams());
 
-            service = new EntitiesGrpcServiceV1("entities_v1.EntitiesV1");
+            service = new EntitiesGrpcServiceV1("entities_v1.Entities");
             service.Configure(grpcConfig);
 
             var references = References.FromTuples(

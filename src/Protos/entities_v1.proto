@@ -40,6 +40,7 @@ option java_multiple_files = true;
 option java_package = "entities.version1";
 option java_outer_classname = "EntitiesProtoV1";
 option objc_class_prefix = "ENTITIES_CMD_V1";
+option csharp_namespace = "PipTemplatesServiceData.EntitiesV1";
 
 package entities_v1;
 

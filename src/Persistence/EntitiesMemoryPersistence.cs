@@ -23,7 +23,7 @@ namespace PipTemplatesServiceData.Persistence
             var siteId = filter.GetAsNullableString("site_id");
             var name = filter.GetAsNullableString("name");
             var names = filter.GetAsNullableString("names");
-            var namesList = names != null ? names.Split(',') : null;
+            var namesList = names != null ? new List<string>(names.Split(',')) : null;
 
             return new List<Func<EntityV1, bool>>()
             {
@@ -35,7 +35,7 @@ namespace PipTemplatesServiceData.Persistence
                         return false;
                     if (name != null && item.Name != name)
                         return false;
-                    if (names != null && names.IndexOf(item.Name) < 0)
+                    if (namesList != null && namesList.IndexOf(item.Name) < 0)
                         return false;
                     return true;
                 }
